@@ -1,0 +1,9 @@
+[submodule "catalog-service"]
+	path = catalog-service
+	url = https://github.com/CristianH98/catalog-service.git
+[submodule "config-repo"]
+	path = config-repo
+	url = https://github.com/CristianH98/config-repo.git
+[submodule "config-service"]
+	path = config-service
+	url = https://github.com/CristianH98/config-service.git
