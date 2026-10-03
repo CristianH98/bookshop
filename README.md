@@ -90,10 +90,6 @@ To start the config server, run:
    docker compose -f polar-deployment/docker/docker-compose.yml up -d
    ```
 
-## Continuous integration
-
-[`.github/workflows/catalog-service.yml`](.github/workflows/catalog-service.yml) builds and tests `catalog-service` for every push and pull request that changes it. On `main` and `develop`, the workflow also publishes the image to `ghcr.io/cristianh98/catalog-service`.
-
 ## Tech stack
 
 - Java 17 for `catalog-service` and Java 21 for `config-service`
