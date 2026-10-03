@@ -2,3 +2,4 @@ rootProject.name = 'bookshop'
 
 include 'catalog-service'
 include 'config-service'
+include 'config-repo'

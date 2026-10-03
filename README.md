@@ -13,7 +13,7 @@ Polar Bookshop is a bookshop that specializes in books about the North Pole and 
 | `config-repo` | Configuration files that `config-service` serves | |
 | `polar-deployment` | Docker Compose file that runs `catalog-service` and PostgreSQL | |
 
-`catalog-service` and `config-service` are subprojects of the Gradle build at the repository root. Run every Gradle command from the root.
+`catalog-service`, `config-service`, and `config-repo` are subprojects of the Gradle build at the repository root. Run every Gradle command from the root.
 
 ## Requirements
 
@@ -74,7 +74,7 @@ To start the config server, run:
 ./gradlew :config-service:bootRun
 ```
 
-`config-service` reads its files from the GitHub repository [CristianH98/config-repo](https://github.com/CristianH98/config-repo), not from the `config-repo` directory. A change to `config-repo` takes effect only after you push it to that repository.
+`config-service` reads the `config-repo` directory from the `main` branch of this repository on GitHub, not from your local copy. A change to `config-repo` takes effect only after it is merged to `main`.
 
 ## Run the catalog service in Docker
 
