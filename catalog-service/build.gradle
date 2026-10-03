@@ -5,13 +5,7 @@ plugins {
 
 }
 
-group = 'com.polarbookshop'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
-
-repositories {
-    mavenCentral()
-}
 
 configurations {       
     compileOnly {

@@ -1,7 +1,15 @@
-name: Commit Stage
+name: Catalog Service - Commit Stage
 on:
   push:
+    paths: &catalog-paths
+      - 'catalog-service/**'
+      - 'gradle/**'
+      - 'gradlew'
+      - 'build.gradle'
+      - 'settings.gradle'
+      - '.github/workflows/catalog-service.yml'
   pull_request:
+    paths: *catalog-paths
 
 env:
   REGISTRY: ghcr.io
@@ -28,7 +36,7 @@ jobs:
         uses: anchore/scan-action@v3
         id: scan
         with:
-          path: "${{ github.workspace }}"
+          path: "${{ github.workspace }}/catalog-service"
           fail-build: false
           severity-cutoff: high                            
           acs-report-enable: true
@@ -40,7 +48,7 @@ jobs:
       - name: Build, unit tests and integration tests
         run: |
           chmod +x gradlew                                 
-          ./gradlew build
+          ./gradlew :catalog-service:build
   package:
     name: Package and Publish
     if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'}}
@@ -62,7 +70,7 @@ jobs:
       - name: Build container image
         run: |
           chmod +x gradlew
-          ./gradlew bootBuildImage \
+          ./gradlew :catalog-service:bootBuildImage \
             --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
       - name: OCI image vulnerability scanning
         uses: anchore/scan-action@v3

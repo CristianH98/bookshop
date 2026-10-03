@@ -13,3 +13,20 @@ Frontend:
 - Angular
 
 
+
+## Repository layout
+
+This is a single repository with one directory per part of the system:
+
+- `catalog-service` – Spring Boot service that manages the book catalog (Gradle subproject)
+- `config-service` – Spring Cloud Config server (Gradle subproject)
+- `config-repo` – configuration files served by `config-service`
+- `polar-deployment` – Docker Compose setup for running the services locally
+
+The Java services are subprojects of one Gradle build. Run Gradle from the repository root:
+
+```bash
+./gradlew build
+./gradlew :catalog-service:bootRun
+./gradlew :catalog-service:bootBuildImage
+```
