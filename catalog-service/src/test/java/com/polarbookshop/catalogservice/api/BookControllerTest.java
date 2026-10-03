@@ -1,16 +1,16 @@
 package com.polarbookshop.catalogservice.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.polarbookshop.catalogservice.domain.Book;
 import com.polarbookshop.catalogservice.exceptions.BookAlreadyExistsException;
 import com.polarbookshop.catalogservice.exceptions.NoSuchBookException;
 import com.polarbookshop.catalogservice.service.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ class BookControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private BookService bookService;
 
     @Test
@@ -76,7 +76,7 @@ class BookControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(toJson(book)))
-                .andExpect(status().isUnprocessableEntity())
+                .andExpect(status().isUnprocessableContent())
                 .andExpect(content().string(containsString(book.isbn())));
     }
 
@@ -180,10 +180,10 @@ class BookControllerTest {
 
     private static String toJson(Book book) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        JsonMapper jsonMapper = new JsonMapper();
 
         try {
-            return objectMapper.writeValueAsString(book);
+            return jsonMapper.writeValueAsString(book);
         } catch (Exception e) {
             throw new RuntimeException();
         }
