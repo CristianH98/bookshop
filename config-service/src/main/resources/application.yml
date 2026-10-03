@@ -14,7 +14,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/CristianH98/config-repo
+          uri: https://github.com/CristianH98/bookshop
+          search-paths: config-repo
           default-label: main
           timeout: 5
           clone-on-start: true
