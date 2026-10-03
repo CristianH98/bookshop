@@ -31,10 +31,12 @@ Book fields:
 
 Local Development
 -----------------
-1. Start a PostgreSQL instance (set credentials via environment or config):
-   - database: `polardb_catalog`
+Run Gradle from the repository root. The root [README](../README.md) has the full setup.
+
+1. Start PostgreSQL:
+   - `docker compose -f polar-deployment/docker/docker-compose.yml up -d polar-postgres`
 2. Run the service:
-   - `./gradlew bootRun`
+   - `./gradlew :catalog-service:bootRun`
 3. Service is available at `http://localhost:9001`
 4. OpenAPI UI: `http://localhost:9001/swagger-ui/index.html`
 
@@ -48,12 +50,12 @@ Edit `src/main/resources/application.yml` to adjust:
 
 Test Data
 ---------
-Run with the `testdata` profile to preload sample books:
-- `./gradlew bootRun --args='--spring.profiles.active=testdata'`
+`./gradlew :catalog-service:bootRun` turns on the `testdata` profile, which replaces the
+books in the database with three sample books.
 
 Testing
 -------
-- `./gradlew test`
+- `./gradlew :catalog-service:test`
 
 Notes
 -----
